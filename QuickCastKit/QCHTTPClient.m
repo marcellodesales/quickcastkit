@@ -16,12 +16,8 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
 {
     if (self = [super initWithBaseURL:[NSURL URLWithString:QCHTTPClientBaseURL]]) {
         
-        //We only deal with JSON here...
-        
         [self setParameterEncoding:AFJSONParameterEncoding];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
-        
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     }
     
     return self;
@@ -36,6 +32,35 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
     });
     
     return _sharedClient;
+}
+
+#pragma mark - HTTP Requests
+
+- (void) callPath:(NSString *)path method:(NSString *)method params:(NSDictionary *)params token:(NSString *)token success:(void (^)(id response))success failure:(void (^)(NSError *error))failure
+{
+    NSMutableURLRequest *request = [self requestWithMethod:method path:path parameters:params];
+    if (token) {
+        [request setValue:token forHTTPHeaderField:@"token"];
+    }
+    
+    AFJSONRequestOperation *op = [[AFJSONRequestOperation alloc] initWithRequest:request];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *op, id response) {
+        if (success) {
+            success(response);
+        }
+    } failure:^(AFHTTPRequestOperation *op, NSError *error) {
+        if (failure) {
+            failure([self errorFromOperation:op]);
+        }
+    }];
+    
+    [self enqueueHTTPRequestOperation:op];
+}
+
+- (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation
+{
+    //TODO: Return a bit more info
+    return [NSError errorWithDomain:@"as.quick.api" code:operation.response.statusCode userInfo:nil];
 }
 
 
