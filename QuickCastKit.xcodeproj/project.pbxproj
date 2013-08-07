@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12145B317B2E7C000836F64 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12145B117B2E7C000836F64 /* MobileCoreServices.framework */; };
+		A12145B417B2E7C000836F64 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12145B217B2E7C000836F64 /* SystemConfiguration.framework */; };
 		A16ABA0117B2C7AD00F3BD72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16ABA0017B2C7AD00F3BD72 /* Foundation.framework */; };
 		A16ABA1017B2C9C800F3BD72 /* QCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABA0F17B2C9C800F3BD72 /* QCHTTPClient.m */; };
 		AB3551AD54724E948492DDFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B4DA63F5F342529485A70A /* libPods.a */; };
@@ -26,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		1F728C929F7540F38914B25A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		A12145B017B2E71100836F64 /* QuickCastKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickCastKit.h; sourceTree = "<group>"; };
+		A12145B117B2E7C000836F64 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A12145B217B2E7C000836F64 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A16AB9FD17B2C7AD00F3BD72 /* libQuickCastKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQuickCastKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16ABA0017B2C7AD00F3BD72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A16ABA0417B2C7AD00F3BD72 /* QuickCastKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickCastKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -39,6 +44,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12145B317B2E7C000836F64 /* MobileCoreServices.framework in Frameworks */,
+				A12145B417B2E7C000836F64 /* SystemConfiguration.framework in Frameworks */,
 				A16ABA0117B2C7AD00F3BD72 /* Foundation.framework in Frameworks */,
 				AB3551AD54724E948492DDFE /* libPods.a in Frameworks */,
 			);
@@ -68,6 +75,8 @@
 		A16AB9FF17B2C7AD00F3BD72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A12145B117B2E7C000836F64 /* MobileCoreServices.framework */,
+				A12145B217B2E7C000836F64 /* SystemConfiguration.framework */,
 				A16ABA0017B2C7AD00F3BD72 /* Foundation.framework */,
 				B3B4DA63F5F342529485A70A /* libPods.a */,
 			);
@@ -77,9 +86,10 @@
 		A16ABA0217B2C7AD00F3BD72 /* QuickCastKit */ = {
 			isa = PBXGroup;
 			children = (
-				A16ABA0317B2C7AD00F3BD72 /* Supporting Files */,
+				A12145B017B2E71100836F64 /* QuickCastKit.h */,
 				A16ABA0E17B2C9C800F3BD72 /* QCHTTPClient.h */,
 				A16ABA0F17B2C9C800F3BD72 /* QCHTTPClient.m */,
+				A16ABA0317B2C7AD00F3BD72 /* Supporting Files */,
 			);
 			path = QuickCastKit;
 			sourceTree = "<group>";
@@ -209,8 +219,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -232,7 +244,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACH_O_TYPE = staticlib;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -244,7 +258,7 @@
 				DSTROOT = /tmp/QuickCastKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "QuickCastKit/QuickCastKit-Prefix.pch";
-				OTHER_LDFLAGS = "`$(inherited)`";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -257,7 +271,7 @@
 				DSTROOT = /tmp/QuickCastKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "QuickCastKit/QuickCastKit-Prefix.pch";
-				OTHER_LDFLAGS = "`$(inherited)`";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

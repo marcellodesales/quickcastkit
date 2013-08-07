@@ -86,7 +86,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
                               @"email" : email,
                               @"mailinglist" : [NSNumber numberWithBool:mailingList] };
     
-    return [self callPath:@"/api/v1/users/signup" method:@"POST" params:params token:nil success:success failure:error];
+    return [self callPath:@"/api/v1/users/signup" method:@"PUT" params:params token:nil success:success failure:error];
 }
 
 - (AFHTTPRequestOperation *) signInWithUsername:(NSString *)username
