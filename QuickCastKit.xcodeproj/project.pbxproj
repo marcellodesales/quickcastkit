@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A16ABA0117B2C7AD00F3BD72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16ABA0017B2C7AD00F3BD72 /* Foundation.framework */; };
-		A16ABA0617B2C7AD00F3BD72 /* QuickCastKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A16ABA0517B2C7AD00F3BD72 /* QuickCastKit.h */; };
-		A16ABA0817B2C7AD00F3BD72 /* QuickCastKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABA0717B2C7AD00F3BD72 /* QuickCastKit.m */; };
+		A16ABA1017B2C9C800F3BD72 /* QCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A16ABA0F17B2C9C800F3BD72 /* QCHTTPClient.m */; };
 		AB3551AD54724E948492DDFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B4DA63F5F342529485A70A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -20,7 +19,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				A16ABA0617B2C7AD00F3BD72 /* QuickCastKit.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,8 +29,8 @@
 		A16AB9FD17B2C7AD00F3BD72 /* libQuickCastKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQuickCastKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16ABA0017B2C7AD00F3BD72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A16ABA0417B2C7AD00F3BD72 /* QuickCastKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickCastKit-Prefix.pch"; sourceTree = "<group>"; };
-		A16ABA0517B2C7AD00F3BD72 /* QuickCastKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickCastKit.h; sourceTree = "<group>"; };
-		A16ABA0717B2C7AD00F3BD72 /* QuickCastKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickCastKit.m; sourceTree = "<group>"; };
+		A16ABA0E17B2C9C800F3BD72 /* QCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCHTTPClient.h; sourceTree = "<group>"; };
+		A16ABA0F17B2C9C800F3BD72 /* QCHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCHTTPClient.m; sourceTree = "<group>"; };
 		B3B4DA63F5F342529485A70A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,9 +77,9 @@
 		A16ABA0217B2C7AD00F3BD72 /* QuickCastKit */ = {
 			isa = PBXGroup;
 			children = (
-				A16ABA0517B2C7AD00F3BD72 /* QuickCastKit.h */,
-				A16ABA0717B2C7AD00F3BD72 /* QuickCastKit.m */,
 				A16ABA0317B2C7AD00F3BD72 /* Supporting Files */,
+				A16ABA0E17B2C9C800F3BD72 /* QCHTTPClient.h */,
+				A16ABA0F17B2C9C800F3BD72 /* QCHTTPClient.m */,
 			);
 			path = QuickCastKit;
 			sourceTree = "<group>";
@@ -122,6 +120,7 @@
 		A16AB9F517B2C7AD00F3BD72 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QC;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Rocket Town Ltd";
 			};
@@ -178,7 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A16ABA0817B2C7AD00F3BD72 /* QuickCastKit.m in Sources */,
+				A16ABA1017B2C9C800F3BD72 /* QCHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
