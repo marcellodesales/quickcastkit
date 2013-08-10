@@ -37,6 +37,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
 - (AFHTTPRequestOperation *) callPath:(NSString *)path
                                method:(NSString *)method
                                params:(NSDictionary *)params
+                              headers:(NSDictionary *)headers
                                 token:(NSString *)token
                               success:(void (^)(id response))success
                               failure:(void (^)(NSError *error))failure
@@ -44,6 +45,11 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
     NSMutableURLRequest *request = [self requestWithMethod:method path:path parameters:params];
     if (token) {
         [request setValue:token forHTTPHeaderField:@"token"];
+    }
+    
+    for (id key in headers) {
+        NSString *val = [[headers objectForKey:key] description];
+        [request setValue:val forHTTPHeaderField:key];
     }
     
     AFJSONRequestOperation *op = [[AFJSONRequestOperation alloc] initWithRequest:request];
@@ -64,7 +70,12 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
 
 - (NSError *)errorFromOperation:(AFHTTPRequestOperation *)operation
 {
-    //TODO: Return a bit more info
+#ifdef DEBUG
+    
+    NSString *body = [[NSString alloc] initWithData:operation.request.HTTPBody encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Operation to URL: %@\nWith body: %@\nFailed with status: %d\nResponse: %@", operation.request.URL.absoluteString, body, operation.response.statusCode, operation.responseString);
+#endif
     return [NSError errorWithDomain:@"as.quick.api" code:operation.response.statusCode userInfo:nil];
 }
 
@@ -86,7 +97,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
                               @"email" : email,
                               @"mailinglist" : [NSNumber numberWithBool:mailingList] };
     
-    return [self callPath:@"/api/v1/users/signup" method:@"PUT" params:params token:nil success:success failure:error];
+    return [self callPath:@"/api/v1/users/signup" method:@"PUT" params:nil headers:params token:nil success:success failure:error];
 }
 
 - (AFHTTPRequestOperation *) signInWithUsername:(NSString *)username
@@ -97,7 +108,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
     NSDictionary *params = @{ @"username" : username,
                               @"password" : password };
     
-    return [self callPath:@"/api/v1/users/signin" method:@"POST" params:params token:nil success:success failure:error];
+    return [self callPath:@"/api/v1/users/signin" method:@"POST" params:nil headers:params token:nil success:success failure:error];
 }
 
 #pragma mark - User
@@ -106,14 +117,14 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
                                       success:(QCHTTPClientSuccessBlock)success
                                         error:(QCHTTPClientErrorBlock)error
 {
-    return [self callPath:@"/api/v1/users/userbytoken" method:@"GET" params:nil token:token success:success failure:error];
+    return [self callPath:@"/api/v1/users/userbytoken" method:@"GET" params:nil headers:nil token:token success:success failure:error];
 }
 
 - (AFHTTPRequestOperation *) fetchMyCastsWithToken:(NSString *)token
                                            success:(QCHTTPClientSuccessBlock)success
                                              error:(QCHTTPClientErrorBlock)error
 {
-    return [self callPath:@"/api/v1/users/usercasts" method:@"GET" params:nil token:token success:success failure:error];
+    return [self callPath:@"/api/v1/users/usercasts" method:@"GET" params:nil headers:nil token:token success:success failure:error];
 }
 
 #pragma mark - Cast
@@ -154,7 +165,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
 {
     
     NSDictionary *params = [self castParamsWithName:name description:description tags:tags intro:intro outro:outro];
-    return [self callPath:@"/api/v1/casts/publish" method:@"PUT" params:params token:token success:success failure:error];
+    return [self callPath:@"/api/v1/casts/publish" method:@"PUT" params:params headers:nil token:token success:success failure:error];
 }
 
 - (AFHTTPRequestOperation *)updateCast:(NSString *)castID
@@ -170,7 +181,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
     NSMutableDictionary *params = [self castParamsWithName:name description:description tags:tags intro:intro outro:outro];
     [params setObject:castID forKey:@"castid"];
     
-    return [self callPath:@"/api/v1/casts/publish/update" method:@"PUT" params:params token:token success:success failure:error];
+    return [self callPath:@"/api/v1/casts/publish/update" method:@"PUT" params:params headers:nil token:token success:success failure:error];
 }
 
 - (AFHTTPRequestOperation *)finishCast:(NSString *)castID
@@ -188,7 +199,7 @@ NSString *const QCHTTPClientBaseURL = @"http://quick.as";
                               @"width" : [NSNumber numberWithUnsignedInteger:width],
                               @"height" : [NSNumber numberWithUnsignedInteger:height] };
     
-    return [self callPath:@"/api/casts/publish/complete" method:@"POST" params:params token:token success:success failure:error];
+    return [self callPath:@"/api/casts/publish/complete" method:@"POST" params:params headers:nil token:token success:success failure:error];
 }
 
 @end
